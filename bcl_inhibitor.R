@@ -24,7 +24,7 @@ df$organ <- factor(df$organ, levels(df$organ)[c(6,3,1,2,4,5)])
 # how does IP compare to PO?
 ggplot(data= df, aes(x=route, y=logconc)) +
   geom_boxplot() + geom_quasirandom(varwidth = T, cex=1.5) +   ggtitle("BM1244 by Route") +
-  labs(x="Route") + labs(y="BM1244 ng/mL") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") +
   theme(plot.title = element_text(family = "Arial", color = "black", face="bold", size=20, hjust=0.5)) +
   theme(axis.title = element_text(family = "Arial", color = "black", face="bold", size=16)) +
   stat_summary(fun.y=mean, geom="point", shape=18, size=15, color="red", alpha= 0.5)
@@ -33,6 +33,6 @@ ggplot(data= df, aes(x=route, y=logconc)) +
 # how does IP compare to PO?
 ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(organ ~ rx) +
    geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by Route, horizontal line is effective dose in vitro") +
-  labs(x="Route") + labs(y="BM1244 ng/mL") + guides(color=guide_legend(title="hours after\nadministration")) +
-  geom_hline(yintercept = log(672))
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(672)) +theme(legend.position = "top")
 
