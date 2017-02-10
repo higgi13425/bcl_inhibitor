@@ -31,8 +31,8 @@ ggplot(data= df, aes(x=route, y=logconc)) +
 
 #what is effect by organ, IP vs. PO?
 # how does IP compare to PO?
-ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(organ ~ rx) +
+ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(rx ~ organ) +
    geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by Route, horizontal line is effective dose in vitro") +
   labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
-  geom_hline(yintercept = log(672)) +theme(legend.position = "top")
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
 
