@@ -47,7 +47,7 @@ stf %>%
   filter(rx=="BM1252") %>%
   ggplot(aes(x=micromolar, y=dct, color=rx)) +
   facet_grid(rx ~ gene) +
-  geom_quasirandom(dodge.width = 1, color=4) +  
+  geom_quasirandom(dodge.width = 1, color=5) +  
   ggtitle("BM1252 in vitro vs. Stiffness Induction of Fibrogenic Genes") +
   labs(x="Dose (micromolar)") + labs(y="dCt") +
   guides(color=guide_legend(title="Drug")) +
