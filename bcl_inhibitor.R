@@ -29,9 +29,69 @@ ggplot(data= df, aes(x=route, y=logconc)) +
   theme(axis.title = element_text(family = "Arial", color = "black", face="bold", size=16)) +
   stat_summary(fun.y=mean, geom="point", shape=18, size=15, color="red", alpha= 0.5)
 
+#what is effect by organ, IP only in healthy mice?
+# how does IP ?
+df %>% 
+  filter(route=="IP") %>% 
+  filter(rx=="HBSS") %>% 
+  ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(. ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by IP Route in healthy mice, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+#what is effect by organ, IP only in diseased mice?
+# how does IP ?
+df %>% 
+  filter(route=="IP") %>% 
+  filter(rx=="S. typhi") %>% 
+  ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(. ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by IP Route in diseased mice, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+#what is effect by organ, PO only in healthy mice?
+# how does IP ?
+df %>% 
+  filter(route=="PO") %>% 
+  filter(rx=="HBSS") %>% 
+  ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(. ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by PO Route in healthy mice, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+#what is effect by organ, PO only in diseased mice?
+# how does IP ?
+df %>% 
+  filter(route=="PO") %>% 
+  filter(rx=="S. typhi") %>% 
+  ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(. ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by PO Route in diseased mice, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+
+#what is effect by organ, IP only?
+# how does IP ?
+df %>% 
+  filter(route=="IP") %>% 
+ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(rx ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by IP Route, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+#what is effect by organ, PO only?
+# how does PO ?
+df %>% 
+  filter(route=="PO") %>% 
+  ggplot(aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(rx ~ organ) +
+  geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by PO Route, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+  geom_hline(yintercept = log(637)) +theme(legend.position = "top")
+
+
 #what is effect by organ, IP vs. PO?
 # how does IP compare to PO?
-ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(rx ~ organ) +
+ggplot(data= df, aes(x=route, y=logconc, color=hr, size=0.8)) + facet_grid(rx ~ organ) +
    geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by Route, horizontal line is effective dose in vitro") +
   labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
   geom_hline(yintercept = log(637)) +theme(legend.position = "top")
