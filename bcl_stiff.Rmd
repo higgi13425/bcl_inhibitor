@@ -42,16 +42,16 @@ stf <- read_excel("ESTF-131.xls", sheet=4)
 
 stf$gene[stf$gene=="col1a1"]<- "Collagen COL1A1"
 stf$gene[stf$gene=="fn1"]<- "Fibronectin FN1"
-stf$gene[stf$gene=="ACTA2"]<- "Alpha Smooth Muscle Actin ACTA2"
-stf$gene[stf$gene=="MYLK"]<- "Myosin Light Chain Kinase MYLK"
+stf$gene[stf$gene=="ACTA2"]<- "Alpha SM Actin ACTA2"
+stf$gene[stf$gene=="MYLK"]<- "Myosin LCK MYLK"
 stf$rx <- as.factor(stf$rx)
 stf$gene <- as.factor(stf$gene)
 stf$micromolar<- as.factor(stf$micromolar)
 ```
 
-## Exploratory Data Analysis
+# Exploratory Data Analysis
 
-#What is the effect by gene x dose for BM1197?
+## What is the effect by gene x dose for BM1197?
 ``` {r, echo=FALSE}
 stf %>%
   filter(rx=="BM1197") %>%
@@ -63,8 +63,12 @@ stf %>%
   guides(color=guide_legend(title="Drug")) +
   theme(legend.position = "top")
 ```
-  
-#What is effect by gene x dose for BM1244?
+
+#### It appears that BM1197 has significant anti-fibrotic effects on all 4 genes
+
+
+
+## What is effect by gene x dose for BM1244?
 ```{r, echo=FALSE}
 stf %>%
   filter(rx=="BM1244") %>%
@@ -77,7 +81,10 @@ stf %>%
   theme(legend.position = "top")
 ```
 
-#What is effect by gene, by dose for BM1252?
+#### It appears that BM1244 has significant anti-fibrotic effects on collagen, FN, and MYLK, but less on aSMA
+
+
+## What is effect x gene x dose for BM1252?
 ```{r, echo=FALSE}
 stf %>%
   filter(rx=="BM1252") %>%
@@ -90,8 +97,12 @@ stf %>%
   theme(legend.position = "top")
 ```
 
-##Put it all together
-#What is effect by gene, by drug, by dose - All drugs?
+#### It appears that BM1252 has minimal anti-fibrotic effects on all 4 genes at only the highest dose
+
+
+
+# Put it all together
+## What is effect by gene, by drug, by dose - All drugs?
 ```{r}
 ggplot(data= stf, aes(x=micromolar, y=dct, color=rx)) +
   facet_grid(rx ~ gene) +
@@ -101,3 +112,8 @@ ggplot(data= stf, aes(x=micromolar, y=dct, color=rx)) +
   guides(color=guide_legend(title="Drug")) +
   theme(legend.position = "top")
 ```
+
+#### It appears that 1197 and 1244 are the best candidates.
+
+#### Since 1197 is not available for commercial reasons, we should proceed with BM1244 as our candidate drug in mice if the pK looks reasonably gut-specific.
+
