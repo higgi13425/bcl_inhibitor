@@ -23,7 +23,8 @@ df$organ <- factor(df$organ, levels(df$organ)[c(6,3,1,2,4,5)])
 #exploratory data analysis
 # how does IP compare to PO?
 ggplot(data= df, aes(x=route, y=logconc)) +
-  geom_boxplot() + geom_quasirandom(varwidth = T, cex=1.5) +   ggtitle("BM1244 by Route") +
+  geom_boxplot() + geom_quasirandom(varwidth = T, cex=1.5) +   
+  ggtitle("BM1244 by Route") +
   labs(x="Route") + labs(y="BM1244 natural log of ng/mL") +
   theme(plot.title = element_text(family = "Arial", color = "black", face="bold", size=20, hjust=0.5)) +
   theme(axis.title = element_text(family = "Arial", color = "black", face="bold", size=16)) +
