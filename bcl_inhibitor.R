@@ -109,8 +109,20 @@ df %>%
 
 #what is effect by organ, IP vs. PO?
 # how does IP compare to PO?
-ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(rx ~ organ) +
-   geom_quasirandom(dodge.width = 1) +   ggtitle("BM1244 by Route, horizontal line is effective dose in vitro") +
-  labs(x="Route") + labs(y="BM1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
+g<- ggplot(data= df, aes(x=route, y=logconc, color=hr)) + facet_grid(rx ~ organ) +
+   geom_quasirandom(dodge.width = 1) +   ggtitle("APG1244 by Route, horizontal line is effective dose in vitro") +
+  labs(x="Route") + labs(y="APG1244 natural log of ng/mL") + guides(color=guide_legend(title="hours after administration")) +
   geom_hline(yintercept = log(637)) +theme(legend.position = "top")
 
+g
+ggsave("grid.png")
+
+library(officer)
+my_pres <- read_pptx()
+layout_summary(my_pres)
+my_pres <-my_pres %>% add_slide(layout = "Blank", master = "Office Theme")
+my_pres <-my_pres %>%
+  ph_with_img_at(src="grid.png", left=0.1, top=0.1,
+                 width = 4, height=4.6)
+
+print(my_pres, target="my_pres.pptx") %>% invisible()
